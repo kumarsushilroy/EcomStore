@@ -1,15 +1,34 @@
 import React from "react";
-import { useAllUsersQuery, useUpdateUserMutation } from "../../redux/authApi";
+import { useAllUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from "../../redux/authApi";
+import {toast}  from 'react-hot-toast';
 
 const Users = () => {
   const { data: allUsers, isLoading, isSuccess } = useAllUsersQuery();
   const [updateUser, { data }] = useUpdateUserMutation();
+  const [deleteUser, {data:deletedUser, isSuccess:deleteUserSuccess, isLoading:deleteUserLoading}] = useDeleteUserMutation();
+  console.log('deleteduserrr==', deletedUser)
 
   const changeRole = async (role, id) => {
     await updateUser({ role, id });
   };
 
-  console.log("allUsssr==", allUsers);
+  // const handleUserDelete = async(id)=>{
+  //  await deleteUser(id);
+  //  if(deleteUserSuccess){
+  //     toast.success(deletedUser?.message || 'user deleted')
+  //  }
+  // }
+
+  const handleUserDelete = async (id) => {
+  try {
+    const res = await deleteUser(id).unwrap();
+    toast.success(res.message || "User deleted");
+  } catch (error) {
+    toast.error(error?.data?.message || "Delete failed");
+  }
+};
+
+ 
   return (
     <div>
       
@@ -20,6 +39,7 @@ const Users = () => {
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +63,7 @@ const Users = () => {
                   <option value="admin">Admin</option>
                 </select>
               </td>
+              <td><button disabled={deleteUserLoading} onClick={()=>{handleUserDelete(item._id)}} className="bg-red-600 hover:bg-red-700 transition-all p-1 px-3 rounded text-white font-bold">Delete</button></td>
             </tr>
           ))}
         </tbody>

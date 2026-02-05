@@ -41,7 +41,7 @@ const UserProfile = () => {
     
               <form>
                 <div>
-                    <input className='bg-gray-100' onChange={(e)=>setUsername(e.target.value)} value={username} className='border-0 bg-grey-100 p-1 rounded' placeholder='username' type="text" />
+                    <input className='bg-gray-100' onChange={(e)=>setUsername(e.target.value)} value={username} placeholder='username' type="text" />
                 </div>
                 <div>
                     <input onChange={(e)=>setEmail(e.target.value)} value={email} className='border-0 bg-grey-100 p-1 rounded' placeholder='email' type="text" />

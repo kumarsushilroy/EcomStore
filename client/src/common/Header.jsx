@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   
+  const cart = useSelector((state)=>state.cart);
+ 
   const { user, logOut } = useContext(UserContext);
-
-  let cart = localStorage.getItem('cartItem');
-  cart = JSON.parse(cart)
+ 
   
   let userr = null ;
   let parsedUser = localStorage.getItem('user');
@@ -31,7 +31,7 @@ const Header = () => {
         <ul className="hidden md:flex space-x-8 text-lg">
           <li className="hover:text-blue-600 cursor-pointer">Home</li>
           <li className="hover:text-blue-600 cursor-pointer">About</li>
-          <Link to='/cartpage' className="hover:text-blue-600 cursor-pointer">Cart({cart?.length})</Link>
+          <Link to='/cartpage' className="hover:text-blue-600 cursor-pointer">Cart({cart?.cart?.length})</Link>
           
           {
             userr && (

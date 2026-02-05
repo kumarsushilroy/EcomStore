@@ -112,6 +112,12 @@ export const authApi = createApi({
                 method:'PUT',
                 body:{role}
             })
+        }),
+        deleteUser:builder.mutation({
+          query:(id)=>({
+            url:`/delete-user/${id}`,
+            method:'DELETE'
+          })
         })
     })
 });
@@ -130,7 +136,8 @@ export const {
     useDeleteProductMutation,
     useRegisterMutation,
     useAllUsersQuery,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useDeleteUserMutation
     } = authApi
 
 

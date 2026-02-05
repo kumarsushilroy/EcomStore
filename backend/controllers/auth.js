@@ -189,4 +189,22 @@ const updateUser = async (req,res)=>{
     }
 }
 
-module.exports = {register, login,  getUser, logout, findSingleUser, updateUser, upload};
+const deleteUser = async (req,res)=>{
+    try {
+        const id = req.params.id
+        const deleteuserInfo = await userSchema.findByIdAndDelete(id);
+        return res.status(200).json({
+            success:true,
+            message:'user deleted successfully !',
+            deleteuserInfo
+        });
+    } catch (error) {
+         return res.status(400).json({
+            success:false,
+            message:'something went wrong !',
+            error:err.message
+        })
+    }
+}
+
+module.exports = {register, login,  getUser, logout, findSingleUser, updateUser, upload, deleteUser};
