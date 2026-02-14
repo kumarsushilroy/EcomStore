@@ -10,13 +10,6 @@ const Home = () => {
   const [categoryVal, setCategoryVal] = useState("");
   const navigate = useNavigate();
 
-  const userOrders = async () => {
-    const res = await axios.get("http://localhost:4000/api/v1/all-orders");
-  };
-  useEffect(() => {
-    userOrders();
-  }, []);
-
   const {
     data: products,
     isLoading,

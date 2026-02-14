@@ -46,7 +46,8 @@ export const authApi = createApi({
         }),
 
         allProducts:builder.query({
-            query:({searchVal,categoryVal})=>`/admin-products/?search=${searchVal}&category=${categoryVal}`
+            // query:({searchVal,categoryVal})=>`/admin-products/?search=${searchVal}&category=${categoryVal}`
+            query:({searchVal,categoryVal})=>`/admin-products}`
         }),
         userOrders:builder.query({
             query:(searchVal)=>`/all-orders/?search=${searchVal}`
