@@ -99,7 +99,7 @@ const addProduct = async () => {
     setEditform(true);
     setproductId(prodId)
     const sigleProd = await axios.get(
-      `http://localhost:4000/api/v1/single-product/${productId}`
+      `https://ecomstore-0oqz.onrender.com/single-product/${productId}`
     );
     console.log("singleProddd", sigleProd);
     setName(productDetail?.singleProd?.name);
