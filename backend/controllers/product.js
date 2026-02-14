@@ -88,7 +88,7 @@ const updateProduct = async (req, res) => {
       price: req.body.price,
       category: req.body.category,
     };
-    if (req.file) {
+    if(req.file) {
       const upload = await cloudinary.uploader.upload(req.file.path);
       updatedData.photo = upload.secure_url;
     }

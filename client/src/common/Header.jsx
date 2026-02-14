@@ -8,13 +8,22 @@ import { useSelector } from "react-redux";
 const Header = () => {
   
   const cart = useSelector((state)=>state.cart);
+  const [user , setUser] = useState(null);
  
-  const { user, logOut } = useContext(UserContext);
+  const { logOut } = useContext(UserContext);
  
   
-  let userr = null ;
-  let parsedUser = localStorage.getItem('user');
-  userr = parsedUser?JSON.parse(parsedUser):null
+  
+
+
+  useEffect(()=>{
+    let parsedUser = localStorage.getItem('user');
+   if(parsedUser!=='undefined'){
+     setUser(JSON.parse(parsedUser));
+   }
+  },[])
+
+ console.log('uuuussr', user) 
 
   const navigate = useNavigate();
 
@@ -34,7 +43,7 @@ const Header = () => {
           <Link to='/cartpage' className="hover:text-blue-600 cursor-pointer">Cart({cart?.cart?.length})</Link>
           
           {
-            userr && (
+            user && (
                <Link to={"/userOrder"}>
                 <li className="hover:text-blue-600 cursor-pointer">My orders</li>
                </Link>
@@ -42,9 +51,9 @@ const Header = () => {
           }
          
           {
-            !userr?(<button onClick={()=>navigate('/login')} className="bg-green-600 text-white px-3 rounded">Login</button>):(
+            !user?(<button onClick={()=>navigate('/login')} className="bg-green-600 text-white px-3 rounded">Login</button>):(
 <span>
-            <li onClick={()=>setDropdown(!dropDown)} className="relative cursor-pointer"><img className="w-15" src={userr?.photo} alt="user" /></li>
+            <li onClick={()=>setDropdown(!dropDown)} className="relative cursor-pointer"><img className="w-15" src={user?.photo} alt="user" /></li>
             {dropDown && (
               <ul className="absolute py-3 px-0 gap-1 flex flex-col bg-gray-100 shadow">
                 <li onClick={()=>{setDropdown(!dropDown), navigate('/userProfile')}} className="px-4 hover:bg-white pointer hover:border-r-2 cursor-pointer">
@@ -75,10 +84,33 @@ const Header = () => {
         }`}
       >
         <ul className="flex flex-col py-4 px-6 space-y-4 text-lg">
-          <li className="hover:text-blue-600">Home</li>
-          <li className="hover:text-blue-600">About</li>
-          <li className="hover:text-blue-600">Services</li>
-          <li className="hover:text-blue-600">Contact</li>
+
+          <Link onClick={()=>setOpen(false)} to='/cartpage' className="hover:text-blue-600 cursor-pointer">Cart({cart?.cart?.length})</Link>
+          {
+            user && (
+               <Link to={"/userOrder"}>
+                <li className="hover:text-blue-600 cursor-pointer">My orders</li>
+               </Link>
+            )
+          }
+          
+          {
+            !user?(<button onClick={()=>navigate('/login')} className="bg-green-600 w-36 text-white px-3 rounded">Login</button>):(
+<span>
+            <li onClick={()=>setDropdown(!dropDown)} className="relative cursor-pointer"><img className="w-15" src={user?.photo} alt="user" /></li>
+            {dropDown && (
+              <ul className="absolute py-3 px-0 gap-1 flex flex-col bg-gray-100 shadow">
+                <li onClick={()=>{setDropdown(!dropDown), navigate('/userProfile')}} className="px-4 hover:bg-white pointer hover:border-r-2 cursor-pointer">
+                  Profile
+                </li>
+                <li onClick={()=>{setDropdown(!dropDown), logOut()}} className="px-4 hover:bg-white pointer hover:border-r-2 cursor-pointer">
+                  Logout
+                </li>
+              </ul>
+            )}
+          </span>
+            )
+          }
         </ul>
       </div>
 

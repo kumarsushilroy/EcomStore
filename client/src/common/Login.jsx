@@ -11,12 +11,17 @@ const Login = () => {
  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
   const userInfo = { email, password };
 
+
   const [userLogin, {isLoading,  error}] = useUserLoginMutation();
-  const stringifiedData = localStorage.getItem('user');
-  let user = stringifiedData?JSON.parse(stringifiedData):null
-  console.log('userrr=', user)
+
+  // const stringifiedData = localStorage.getItem('user');
+  // if(stringifiedData && stringifiedData!==undefined){
+  //   setUser(JSON.parse(stringifiedData));
+  // }
+  
  useEffect(() => {
   if(error){
     alert(error?.data.message)

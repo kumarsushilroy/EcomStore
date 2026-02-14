@@ -107,10 +107,10 @@ export const authApi = createApi({
             query:()=>'/all-users'
         }),
         updateUser:builder.mutation({
-            query:({role,id})=>(console.log('fromRTK==', role,id),{
+            query:({id,userInfo})=>({
                 url:`/update-user/${id}`,
                 method:'PUT',
-                body:{role}
+                body:userInfo
             })
         }),
         deleteUser:builder.mutation({
@@ -118,7 +118,8 @@ export const authApi = createApi({
             url:`/delete-user/${id}`,
             method:'DELETE'
           })
-        })
+        }),
+        
     })
 });
 

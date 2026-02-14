@@ -11,7 +11,7 @@ router.post('/logout', logout)
 
 router.get('/all-users', getUser);
 router.get('/single-user', authenticatedUser, findSingleUser);
-router.put('/update-user/:id', updateUser);
+router.put('/update-user/:id', upload.single('photo'), updateUser);
 router.delete('/delete-user/:id', deleteUser);
 
 router.get('/test', authenticatedUser, async(req,res)=>{

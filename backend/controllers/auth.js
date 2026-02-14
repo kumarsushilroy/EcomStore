@@ -26,7 +26,7 @@ const { options } = require('../routes/auth.js');
     const upload = multer({
         storage:imgConfig,
         fileFilter:isImage
-    })
+    })  
 
 const register = async (req,res)=>{
   console.log('filePath-- ', req.file)
@@ -171,10 +171,20 @@ const findSingleUser = async (req,res)=>{
 }
 
 const updateUser = async (req,res)=>{
+    
     try{
       const id = req.params.id;
-      const update = await userSchema.findByIdAndUpdate({_id:id}, req.body, {new:true});
-      console.log('upDated==', id, req.body)
+      const updatedData = {
+        username:req.body.username,
+        email:req.body.email
+        // password:req.body.password && await bcrypt.hash(req.body.password,10),
+      }
+      if(req.file){
+        const uploaded = await cloudinary.uploader.upload(req.file.path);
+        updatedData.photo = uploaded.secure_url
+      }
+      const update = await userSchema.findByIdAndUpdate({_id:id}, updatedData, {new:true});
+      console.log('upDated==', updatedData)
       return res.status(200).json({
         success:true,
         message:'user updated successfully',
