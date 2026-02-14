@@ -18,14 +18,14 @@ export const ProductContextProvider = ({ children }) => {
 
   const getProducts = async () => {
     let products = await axios.get(
-      "http://localhost:4000/api/v1/admin-products"
+      "https://ecomstore-0oqz.onrender.com/admin-products"
     );
     setProduct(products?.data?.product);
   };
 
   const userOrders = async () => {
     try {
-      const resp = await axios.get("http://localhost:4000/api/v1/all-orders");
+      const resp = await axios.get("https://ecomstore-0oqz.onrender.com/all-orders");
       setUserOrder(resp?.data.orders)
     } catch (error) {
       return resp.status(400).json({
