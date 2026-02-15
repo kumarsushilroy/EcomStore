@@ -23,7 +23,6 @@ const Header = () => {
    }
   },[])
 
- console.log('uuuussr', user) 
 
   const navigate = useNavigate();
 
