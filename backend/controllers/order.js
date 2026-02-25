@@ -34,7 +34,7 @@ const createOrder = async (req, res) => {
 };
 
 const getOrders = async (req,res)=>{
-  
+
   const {search} = req.query
   let query ={}
   if(search){
@@ -44,10 +44,11 @@ const getOrders = async (req,res)=>{
     ]
 
   }
-  console.log('query=', query)
    
     try {
-        const orders = await orderSchema.find(query).populate('user', "username").lean().populate('shippingAddress')
+      const user = req.user._id
+        // const orders = await orderSchema.find(query).populate('user', "username").lean().populate('shippingAddress')
+         const orders = await orderSchema.find({user,...query});
         console.log(orders)
         return res.status(200).json({
             success:true,

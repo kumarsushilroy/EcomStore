@@ -22,13 +22,14 @@
 // });
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "../Constant";
 
 
 
 export const authApi = createApi({
     reducerPath:'authApi',
     baseQuery:fetchBaseQuery({
-        baseUrl:'https://ecomstore-0oqz.onrender.com',
+        baseUrl:BASE_URL,
         credentials:'include',
     }),
     tagTypes:['auth'],
@@ -46,7 +47,7 @@ export const authApi = createApi({
         }),
 
         allProducts:builder.query({
-            query:({searchVal,categoryVal})=>`/admin-products/?search=${searchVal}&category=${categoryVal}`
+            query:({searchVal,categoryVal})=>`/admin-products?search=${searchVal}&category=${categoryVal}`
             
         }),
         userOrders:builder.query({
@@ -112,7 +113,8 @@ export const authApi = createApi({
                 url:`/update-user/${id}`,
                 method:'PUT',
                 body:userInfo
-            })
+            }),
+            provideTagsTypes:['auth']
         }),
         deleteUser:builder.mutation({
           query:(id)=>({

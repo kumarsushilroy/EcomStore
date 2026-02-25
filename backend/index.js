@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieparser());
 
 app.use(cors({
-    origin:'https://ecomstore-frontend-dz9b.onrender.com',
+    origin:'http://localhost:5173',
     credentials:true
 }));
 

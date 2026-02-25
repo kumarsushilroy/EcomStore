@@ -13,7 +13,7 @@ const Cart = () => {
 
    const [showAddress, setShowAddress] = React.useState(false)
    const [addressId , setAddressId] = useState('');
-   const [paymentMode , setPaymentMode] = useState('');
+   const [paymentMode , setPaymentMode] = useState('COD');
 
    const {data:address} = useGetAddressQuery();
    const [placeOrder, {data:orderedData}] = usePlaceOrderMutation();

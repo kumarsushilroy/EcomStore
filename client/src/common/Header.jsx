@@ -21,8 +21,9 @@ const Header = () => {
    if(parsedUser!=='undefined'){
      setUser(JSON.parse(parsedUser));
    }
-  },[])
+  },[localStorage.getItem('user')])
 
+  console.log('USER==', user)
 
   const navigate = useNavigate();
 

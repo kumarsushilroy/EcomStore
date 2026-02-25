@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { BASE_URL } from "../../Constant";
 export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
@@ -18,7 +18,7 @@ export const ProductContextProvider = ({ children }) => {
 
   const getProducts = async () => {
     let products = await axios.get(
-      "https://ecomstore-0oqz.onrender.com/admin-products"
+      `${BASE_URL}/admin/products`
     );
     setProduct(products?.data?.product);
   };
