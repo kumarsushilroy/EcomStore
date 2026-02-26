@@ -23,21 +23,21 @@ const Adminlayout = () => {
       icon: <FaHome />,
       path: "/admin-dashboard",
     },
-    {
-      name: "Categories",
-      icon: <BiCategory />,
-      path: "/admin-categories",
-    },
+    // {
+    //   name: "Categories",
+    //   icon: <BiCategory />,
+    //   path: "/admin-categories",
+    // },
     {
       name: "Products",
       icon: <MdProductionQuantityLimits />,
       path: "/admin-products",
     },
-    {
-      name: "Suppliers",
-      icon: <HiMiniTruck />,
-      path: "/admin-suppliers",
-    },
+    // {
+    //   name: "Suppliers",
+    //   icon: <HiMiniTruck />,
+    //   path: "/admin-suppliers",
+    // },
     {
       name: "Orders",
       icon: <FaShoppingCart />,

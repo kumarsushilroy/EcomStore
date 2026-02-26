@@ -1,15 +1,18 @@
 import React from "react";
-import { useAllUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from "../../redux/authApi";
+import { useAllUsersQuery, useUpdateUserMutation, useDeleteUserMutation, useUpdateRoleMutation  } from "../../redux/authApi";
 import {toast}  from 'react-hot-toast';
 
 const Users = () => {
   const { data: allUsers, isLoading, isSuccess } = useAllUsersQuery();
   const [updateUser, { data }] = useUpdateUserMutation();
   const [deleteUser, {data:deletedUser, isSuccess:deleteUserSuccess, isLoading:deleteUserLoading}] = useDeleteUserMutation();
+  const [updateRole] = useUpdateRoleMutation();
   console.log('deleteduserrr==', deletedUser)
 
   const changeRole = async (role, id) => {
-    await updateUser({ role, id });
+    const obj = { role, id }
+    await updateRole(obj);
+   
   };
 
   // const handleUserDelete = async(id)=>{

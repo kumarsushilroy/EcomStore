@@ -47,11 +47,27 @@ export const authApi = createApi({
         }),
 
         allProducts:builder.query({
-            query:({searchVal,categoryVal})=>`/admin-products?search=${searchVal}&category=${categoryVal}`
+            query:({searchVal,categoryVal})=>({
+                url:'/admin-products',
+                params:{
+                    search:searchVal,
+                    category:categoryVal
+                }
+            }),
+           
             
         }),
         userOrders:builder.query({
-            query:(searchVal)=>`/all-orders/?search=${searchVal}`
+            query:(searchVal)=>({
+                url:'/user-orders',
+                params:{
+                    search:searchVal
+                }
+            })
+        }),
+
+        allOrders:builder.query({
+            query:()=>'/all-orders'
         }),
         // addToCart:builder.mutation({
         //     query:(cartInfo)=>{
@@ -122,6 +138,15 @@ export const authApi = createApi({
             method:'DELETE'
           })
         }),
+
+        updateRole:builder.mutation({
+            query:({role,id})=>({
+                url:`change-role/${id}`,
+                method:'PUT',
+                body:{role:role}
+            }),
+            providesTags:['auth']
+        })
         
     })
 });
@@ -141,7 +166,9 @@ export const {
     useRegisterMutation,
     useAllUsersQuery,
     useUpdateUserMutation,
-    useDeleteUserMutation
+    useDeleteUserMutation,
+    useUpdateRoleMutation,
+    useAllOrdersQuery
     } = authApi
 
 

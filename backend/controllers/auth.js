@@ -217,4 +217,30 @@ const deleteUser = async (req,res)=>{
     }
 }
 
-module.exports = {register, login,  getUser, logout, findSingleUser, updateUser, upload, deleteUser};
+const changeUserRole = async (req,res)=>{
+    try {
+        const userId = req.params.id
+        const updateRole = {role:req.body.role}
+        const changeRole = await userSchema.findByIdAndUpdate({_id:userId},updateRole,{new:true} )
+        console.log('userRole==', changeRole)
+        console.log('req-body==', req.body)
+    } catch (error) {
+         return res.status(400).json({
+            success:false,
+            message:'something went wrong !',
+            error:error.message
+        })
+    }
+}
+
+module.exports = {
+    register,
+     login,
+     getUser,
+     logout,
+     findSingleUser,
+     updateUser,
+     upload,
+     deleteUser,
+     changeUserRole
+    };

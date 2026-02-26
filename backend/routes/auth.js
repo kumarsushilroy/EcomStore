@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const {register, login, upload, getUser, logout, findSingleUser, updateUser, deleteUser} = require('../controllers/auth.js');
+const {register, login, upload, getUser, logout, findSingleUser, updateUser, deleteUser, changeUserRole} = require('../controllers/auth.js');
 const authenticatedUser = require('../middleware.js');
 
 router.post('/register', upload.single('photo'), register);
@@ -13,6 +13,7 @@ router.get('/all-users', getUser);
 router.get('/single-user', authenticatedUser, findSingleUser);
 router.put('/update-user/:id', upload.single('photo'), updateUser);
 router.delete('/delete-user/:id', deleteUser);
+router.put('/change-role/:id', authenticatedUser, changeUserRole );
 
 router.get('/test', authenticatedUser, async(req,res)=>{
    return res.json({

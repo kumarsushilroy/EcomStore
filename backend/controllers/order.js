@@ -33,7 +33,7 @@ const createOrder = async (req, res) => {
   }
 };
 
-const getOrders = async (req,res)=>{
+const userOrders = async (req,res)=>{
 
   const {search} = req.query
   let query ={}
@@ -89,4 +89,22 @@ const updateOrderStatus = async(req,res)=>{
   }
 }
 
-module.exports = {createOrder, getOrders, updateOrderStatus}
+const allOrders = async (req,res)=>{
+  try {
+    const orders = await orderSchema.find();
+    console.log('ordersss',orders)
+    return res.status(200).json({
+      success:true,
+      orders
+    });
+    
+  } catch (error) {
+    return res.status(400).json({
+      success:false,
+      message:'something went wrong !',
+      error:error.message
+     })
+  }
+}
+
+module.exports = {createOrder, userOrders, updateOrderStatus, allOrders}
