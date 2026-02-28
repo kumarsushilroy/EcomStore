@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetAddressQuery } from "../../redux/authApi";
 import { usePlaceOrderMutation } from "../../redux/authApi";
 import { HiBars4 } from "react-icons/hi2";
+import swal from 'sweetalert'
 
 const Cart = () => {
    
@@ -28,6 +29,7 @@ const Cart = () => {
    const makeOrder = ()=>{
      placeOrder(orderDetails)
      console.log('orderedDataa', orderedData);
+     swal("Order Placed Successfully !", "", "success");
      dispatch(clearCart())
    }
   
