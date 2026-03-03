@@ -17,9 +17,8 @@ app.use(express.json());
 app.use(cookieparser());
 
 app.use(cors({
-    // origin:'http://localhost:5173',
-    // origin:'https://ecomstore-frontend-dz9b.onrender.com',
-    origin:'https://ecomstore-client-jcix.onrender.com',
+    origin:'http://localhost:5173',
+    // origin:'https://ecomstore-client-jcix.onrender.com',
     credentials:true
 }));
 
