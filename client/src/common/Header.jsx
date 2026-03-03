@@ -38,8 +38,7 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-lg">
-          <li className="hover:text-blue-600 cursor-pointer">Home</li>
-          <li className="hover:text-blue-600 cursor-pointer">About</li>
+          <Link to={'/'} className="hover:text-blue-600 cursor-pointer">Home</Link>
           <Link to='/cartpage' className="hover:text-blue-600 cursor-pointer">Cart({cart?.cart?.length})</Link>
           
           {

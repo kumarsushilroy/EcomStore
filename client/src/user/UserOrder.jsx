@@ -15,10 +15,15 @@ const UserOrder = () => {
     <>
     {
       userOrder?.orders?.length<1 && (
-        <h3 className="text-center mt-36">No Orders Yet</h3>
+        <h3 className="text-center text-red-600">No Orders Found !</h3>
       )
     }
-    <div className="container-fluid">
+    
+
+    {
+      userOrder?.orders?.length>1 && (
+         <div className="container-fluid">
+
       <div className="col-md-10 mx-auto">
         
           <input onChange={(e)=>setSearchVal(e.target.value)} className="border outline-0 m-2 p-2 rounded-xl shadow w-1/4" placeholder="search..." type="text" />
@@ -81,6 +86,9 @@ const UserOrder = () => {
         </table>
       </div>
     </div>
+      )
+    }
+   
     </>
   );
 };

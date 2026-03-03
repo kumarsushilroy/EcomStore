@@ -55,10 +55,20 @@ const Login = () => {
   return (
     <div className="row d-flex justify-content-center mt-5">
       <div className="col-md-3 shadow-lg mx-auto rounded">
+        
         <form onSubmit={handleSubmit} className="p-5">
+          <button onClick={()=>navigate('/')} className="bg-blue-50 px-4 rounded">back</button>
           <h3 className="text-center text-success">Login</h3>
-          
-          <div className="mb-3">
+           <p className="font-bold m-0">admin credential</p>
+           <p className="m-0">email: admin@gmail.com</p>
+           <p className="m-0">password: admin123</p>
+
+           <h1 className="my-3"></h1>
+           <p className="font-bold m-0">user credential</p>
+           <p className="m-0">email: suryas@gmail.com</p>
+           <p className="m-0">password: suryas123</p>
+
+          <div className="mb-3 mt-4">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email
             </label>

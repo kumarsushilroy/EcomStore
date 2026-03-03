@@ -6,7 +6,7 @@ import {toast} from 'react-hot-toast';
 const Register = () => {
 
  const [register,{data:userData, isSuccess, isLoading}] = useRegisterMutation();
- console.log('succccccsss=', isSuccess)
+ console.log('succccccsss=', userData)
   
  const navigate = useNavigate();
  
