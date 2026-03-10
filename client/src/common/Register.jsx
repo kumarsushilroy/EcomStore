@@ -5,7 +5,7 @@ import {toast} from 'react-hot-toast';
 
 const Register = () => {
 
- const [register,{data:userData, isSuccess, isLoading}] = useRegisterMutation();
+ const [register,{data:userData, isSuccess, isLoading, error}] = useRegisterMutation();
  console.log('succccccsss=', userData)
   
  const navigate = useNavigate();
@@ -15,7 +15,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [photo , setPhoto] = useState("");
   
-
+ useEffect(() => {
+  if(error){
+    toast.error(error?.data.message)
+    return
+  }
+ 
+}, [error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,13 +30,13 @@ const Register = () => {
    formData.append('email', email);
    formData.append('password', password);
    formData.append('photo', photo)
-   await register(formData);
-   if(isSuccess){
-    toast.success('Register successfully !')
-    setTimeout(()=>{
-      navigate('/login')
-    },1000)
-   }
+   try {
+   await register(formData).unwrap();
+   toast.success("Register successfully!");
+   navigate("/login");
+} catch(err){
+   toast.error(err?.data?.message);
+}
   }
 
   
@@ -47,6 +53,7 @@ const Register = () => {
               Username
             </label>
             <input
+              required
               onChange={(e) => setUserName(e.target.value)}
               type="text"
               className="form-control"
@@ -58,6 +65,7 @@ const Register = () => {
               Email
             </label>
             <input
+             required
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               className="form-control"
@@ -70,6 +78,7 @@ const Register = () => {
               Password
             </label>
             <input
+              
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="form-control"

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const cloudinary = require('../helper/helper.js');
 const { options } = require('../routes/auth.js');
+const {sendEmailMsg} = require('../sendmail.js')
 
 // img Config...
  const imgConfig = multer.diskStorage({
@@ -29,10 +30,14 @@ const { options } = require('../routes/auth.js');
     })  
 
 const register = async (req,res)=>{
-  console.log('filePath-- ', req.file)
+//   console.log('filePath-- ', req.file)
     try {
-        const cloudImg = await cloudinary.uploader.upload(req.file.path);
-        console.log('CLOUDINARY== ', cloudImg);
+        let cloudImg
+        if(req.file){
+          cloudImg = await cloudinary.uploader.upload(req.file.path);
+           console.log('CLOUDINARY== ', cloudImg);
+        }
+       
 
         const {username, email, password} = req.body
         if(!username || !email || !password){
@@ -51,9 +56,10 @@ const register = async (req,res)=>{
             username,
             email,
             password:hashPass,
-            photo:cloudImg.secure_url
+            photo:cloudImg?.secure_url
             });
         await user.save();
+        sendEmailMsg(username)
         return res.status(200).json({ 
             success:true,
             message:'Registered Successfully',
@@ -69,6 +75,7 @@ const register = async (req,res)=>{
 }
 
 const login = async (req,res)=>{
+  
     try{
      const {email,password} = req.body;
      if(!email || !password){
@@ -95,16 +102,18 @@ const login = async (req,res)=>{
         maxAge:30*24*60*60*1000,
         secure:false
      })
+     
      return res.status(200).json({
         success:true,
         message:'logged in successfully',
-        user:user
+        user:user 
+        
      })
     }catch(err){
       return res.status(400).json({
         success:false,
         message:'something went wrong !',
-        error:err.message
+        error:err.message 
       })
     }
 }
@@ -233,6 +242,26 @@ const changeUserRole = async (req,res)=>{
     }
 }
 
+// const sendEmail = async (req,res)=>{
+//     const resp = await sendEmailMsg(),
+//     try {
+//          res.status(200).json({
+//         success:true,
+//         message:'email send successfully',
+//          resp
+        
+       
+//     } console.log('resppp,' resp))
+//     } catch (error) {
+//           return res.status(400).json({
+//             success:false,
+//             message:'something went wrong !',
+//             error:error.message
+//         })
+//     }
+  
+// }
+
 module.exports = {
     register,
      login,
@@ -242,5 +271,5 @@ module.exports = {
      updateUser,
      upload,
      deleteUser,
-     changeUserRole
+     changeUserRole,
     };

@@ -34,7 +34,7 @@ const Header = () => {
     <nav className="w-full bg-white shadow-md  top-0 left-0 z-10">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <h4 className="text-2xl font-bold text-blue-600">MyLogo</h4>
+        <h4 className="text-2xl font-bold text-blue-600">EcomStore</h4>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-lg">

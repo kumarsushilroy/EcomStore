@@ -24,6 +24,7 @@ const Home = () => {
       <header className="bg-gray-800 text-white py-8">
         <h1 className="text-4xl font-bold">Welcome to Our Store</h1>
         <p className="text-lg mt-2">Discover our amazing products!</p>
+       
       </header>
 
       <main className="container mx-auto px-4 py-8">
